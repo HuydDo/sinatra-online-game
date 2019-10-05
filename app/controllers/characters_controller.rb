@@ -1,8 +1,9 @@
 class CharactersController < ApplicationController
 
   #Create
-  get '/characters/new'
-    erb :new
+  get '/characters' do
+    @characters = Character.all
+    erb :'characters/index'
   end
   
   #Read
