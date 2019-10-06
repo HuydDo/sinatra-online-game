@@ -1,31 +1,40 @@
 class CharactersController < ApplicationController
 
-  #Index
+ #index
   get '/characters' do
     @characters = Character.all
     erb :'characters/index'
   end
   
-  #Create
+  #new
   get '/characters/new' do
     erb :'/characters/new'
   end
 
+  #create
   post '/characters' do
-    user = Helpers.current_user(session)
+    # binding.pry
+    # user = Helpers.current_user(session)
     character = Character.create(
       :name => params["name"], 
-      :class => params["class"], 
-      :race => params["race"], 
-      :user_id => user.id)
-    
+      :character_class => params["character_class"], 
+      :race => params["race"])
+      # :user_id => user.id)
     if character.save
       redirect to '/characters'
     else 
       redirect to '/characters/new'
     end
   end
-  #Read
+
+  
+  #show
+  get '/characters/:id' do
+    @character = Character.find(params[:id])
+
+    erb :'characters/show'
+  end
+
   #Update
   #Delete
 

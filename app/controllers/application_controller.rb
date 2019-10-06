@@ -13,14 +13,14 @@ class ApplicationController < Sinatra::Base
     erb :index
   end
 
-  helpers do
-    def current_user
-      @user = User.find(session[:user_id])
-    end
+  # helpers do
+  #   def current_user
+  #     @user = User.find(session[:user_id])
+  #   end
   
-    def is_logged_in?
-      !!session[:user_id]
-    end
-  end
+  #   def is_logged_in?
+  #     !!session[:user_id]
+  #   end
+  # end
 
 end
