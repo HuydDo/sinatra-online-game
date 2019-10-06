@@ -1,1 +1,13 @@
-@characters.each do |character|
+<form action="/characters/<%= @character.id %>" method="post">
+  <input type="hidden" id="hidden" name="_method" value="patch">
+  <label>Name:</label>
+  <input type="text" name="name" id="name"
+    value="<%= @character.name %>"><br><br>
+  <label>Class:</label>
+  <input type="text" name="character_class" id="character_class"
+    value="<%= @character.character_class %>"><br><br>
+  <label>Race:</label>
+  <input type="text" name="race" id="race"
+    value="<%= @character.race %>"><br><br>
+  <input type="submit" value="submit">
+</form>

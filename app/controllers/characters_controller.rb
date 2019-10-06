@@ -40,7 +40,10 @@ class CharactersController < ApplicationController
   end
 
   #edit
-
+  get '/characters/:id/edit' do
+    @character = Character.find(params[:id])
+    erb :'characters/edit'
+  end
 
   #Create
   #Read
