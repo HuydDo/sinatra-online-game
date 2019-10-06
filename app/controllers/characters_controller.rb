@@ -32,9 +32,18 @@ class CharactersController < ApplicationController
   get '/characters/:id' do
     @character = Character.find(params[:id])
 
-    erb :'characters/show'
+    if @character
+      erb :'characters/show'
+    else
+      redirect to '/characters'
+    end
   end
 
+  #edit
+
+
+  #Create
+  #Read
   #Update
   #Delete
 

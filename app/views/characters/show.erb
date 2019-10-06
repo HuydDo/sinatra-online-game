@@ -1,0 +1,11 @@
+<p>Name: <%= @character.name %></p>
+<p>Class: <%= @character.character_class %></p>
+<p>Race: <%= @character.race %></p>
+
+<a href="/characters/<%= @character.id %>/edit"><button>Edit</button></a>
+<br><br>
+<form method="POST" action="/character/<%= @character.id %>/delete">
+  <input type="hidden" name="_method" value="delete"/>
+  <input type="submit" value="Delete"><br><br>
+</form>
+<a href="/tweets">Back to Characters</a>
