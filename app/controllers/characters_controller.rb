@@ -12,13 +12,18 @@ class CharactersController < ApplicationController
   end
 
   post '/characters' do
-    user = current_user(session)
+    user = Helpers.current_user(session)
     character = Character.create(
       :name => params["name"], 
       :class => params["class"], 
       :race => params["race"], 
       :user_id => user.id)
-    redirect to '/characters'
+    
+    if character.save
+      redirect to '/characters'
+    else 
+      redirect to '/characters/new'
+    end
   end
   #Read
   #Update
