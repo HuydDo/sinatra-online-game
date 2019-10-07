@@ -45,6 +45,23 @@ class CharactersController < ApplicationController
     erb :'characters/edit'
   end
 
+  #edit
+  patch '/characters/:id' do
+    character = Character.find(params[:id])
+   
+    character.update(:name => params["name"],
+    :character_class => params["character_class"],
+    :race => params["race"]
+    )
+    
+    if character.save
+      redirect to "/characters/#{character.id}"
+    else
+      redirect to "/characters/#{params[:id]}/edit"
+    end
+   end
+  
+
   #Create
   #Read
   #Update
