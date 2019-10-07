@@ -30,7 +30,7 @@ class CharactersController < ApplicationController
   
   #show
   get "/characters/:id" do
-    @character = Character.find(params[:id])
+    @character = Character.find_by_id(params[:id])
 
     if @character
       erb :"characters/show"
@@ -41,13 +41,13 @@ class CharactersController < ApplicationController
 
   #edit
   get "/characters/:id/edit" do
-    @character = Character.find(params[:id])
+    @character = Character.find_by_id(params[:id])
     erb :"characters/edit"
   end
 
   #update
   patch "/characters/:id" do
-    character = Character.find(params[:id])
+    character = Character.find_by_id(params[:id])
    
     if character.update(:name => params["name"],
     :character_class => params["character_class"],
