@@ -1,18 +1,18 @@
 class CharactersController < ApplicationController
 
  #index
-  get '/characters' do
+  get "/characters" do
     @characters = Character.all
-    erb :'characters/index'
+    erb :"characters/index"
   end
   
   #new
-  get '/characters/new' do
-    erb :'/characters/new'
+  get "/characters/new" do
+    erb :"/characters/new"
   end
 
   #create
-  post '/characters' do
+  post "/characters" do
     # binding.pry
     # user = Helpers.current_user(session)
     character = Character.create(
@@ -21,43 +21,41 @@ class CharactersController < ApplicationController
       :race => params["race"])
       # :user_id => user.id)
     if character.save
-      redirect to '/characters'
+      redirect to "/characters"
     else 
-      redirect to '/characters/new'
+      redirect to "/characters/new"
     end
   end
 
   
   #show
-  get '/characters/:id' do
+  get "/characters/:id" do
     @character = Character.find(params[:id])
 
     if @character
-      erb :'characters/show'
+      erb :"characters/show"
     else
-      redirect to '/characters'
+      redirect to "/characters"
     end
   end
 
   #edit
-  get '/characters/:id/edit' do
+  get "/characters/:id/edit" do
     @character = Character.find(params[:id])
-    erb :'characters/edit'
+    erb :"characters/edit"
   end
 
-  #edit
-  patch '/characters/:id' do
+  #update
+  patch "/characters/:id" do
     character = Character.find(params[:id])
    
-    character.update(:name => params["name"],
+    if character.update(:name => params["name"],
     :character_class => params["character_class"],
     :race => params["race"]
     )
-    
-    if character.save
       redirect to "/characters/#{character.id}"
     else
-      redirect to "/characters/#{params[:id]}/edit"
+      redirect to "/characters/#{character.id}/edit"
     end
    end
   
