@@ -3,17 +3,16 @@ class CharactersController < ApplicationController
  #index
   get "/characters" do
     # binding.pry
-    # if !Helpers.is_logged_in?(session)
-    #   redirect to '/login'
-    # end
-    if session[:user_id]
+    if !Helpers.is_logged_in?(session)
+      redirect to '/login'
+    else
+    # if session[:user_id]
      @user = Helpers.current_user(session)
      @characters = @user.characters
      erb :"characters/index"
-    else
-      redirect to '/login'
+    # else
+    #   redirect to '/login'
     end  
-    
   end
   
   #new
