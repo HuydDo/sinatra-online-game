@@ -59,6 +59,12 @@ class CharactersController < ApplicationController
     end
    end
   
+   #delete
+   delete "/characters/:id" do
+    Character.destroy(params[:id])
+    redirect to "/characters"
+
+   end
 
   #Create
   #Read
