@@ -2,6 +2,10 @@ class CharactersController < ApplicationController
 
  #index
   get "/characters" do
+    # binding.pry
+    if !Helpers.is_logged_in?(session)
+      redirect to '/login'
+    end
     @characters = Character.all
     erb :"characters/index"
   end
