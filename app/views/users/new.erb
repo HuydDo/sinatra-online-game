@@ -1,11 +1,13 @@
 <h3>Sign Up</h3>
 <form action="/signup" method="post">
   <label>User Name</label>
-  <input type="text" name="username" id="username">
+  <input type="text" name="username" id="username"
+    value=" <%= @user ? @user.username : "" %>">
   <br><br>
 
   <label>Email</label>
-  <input type="text" name="email" id="email">
+  <input type="text" name="email" id="email"
+  value=" <%= @user ? @user.email : "" %>">
   <br><br>
 
   <label>Password</label>
