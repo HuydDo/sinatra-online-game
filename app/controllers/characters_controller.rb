@@ -72,7 +72,6 @@ class CharactersController < ApplicationController
    delete "/characters/:id" do
     Character.destroy(params[:id])
     redirect to "/characters"
-
    end
 
   #Create

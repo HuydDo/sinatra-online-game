@@ -1,12 +1,35 @@
 <h2>Create New Character</h2>
 <form action="/characters" method="post">
-  <label>Name:</label>
+  <label>Name</label>
   <input type="text" name="name"><br><br>
-  <label>Class:</label>
-  <input type="text" name="character_class"><br><br>
-  <label>Race:</label>
-  <input type="text" name="race"><br><br>
-  <input type="submit"><br>
-  <br>
+  <label for="class-select">Class</label>
+  
+  <select name= "character_class" id="class-select">
+    <option value="">--Please choose class--</option>
+    <option value="Warrior">Warrior</option>
+    <option value="Paladin">Paladin</option>
+    <option value="Hunter">Hunter</option>
+    <option value="Rogue">Rogue</option>
+  </select>
+  
+  <br><br>
+ <!-- <input type="text" name="character_class"><br><br>
+ -->
+  <label for="race-select">Race</label>
+  
+  <select name="race" id="race-select">
+    <option value="">--Please choose race--</option>
+    <option value="Human">Human</option>
+    <option value="Dwarf">Dwarf</option>
+    <option value="Night Elf">Night Elf</option>
+    <option value="Gnome">Gnome</option>
+  </select>
+ 
+  <br><br>
+  <!-- <input type="text" name="race"><br><br> -->
+  
+  <input type="submit">
+  
+  <br><br>
   <a href="/logout"><button>Log Out</button></a><br>
 </form>
