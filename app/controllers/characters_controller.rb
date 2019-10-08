@@ -3,11 +3,17 @@ class CharactersController < ApplicationController
  #index
   get "/characters" do
     # binding.pry
-    if !Helpers.is_logged_in?(session)
+    # if !Helpers.is_logged_in?(session)
+    #   redirect to '/login'
+    # end
+    if session[:user_id]
+     @user = Helpers.current_user(session)
+     @characters = @user.characters
+     erb :"characters/index"
+    else
       redirect to '/login'
-    end
-    @characters = Character.all
-    erb :"characters/index"
+    end  
+    
   end
   
   #new
@@ -18,12 +24,12 @@ class CharactersController < ApplicationController
   #create
   post "/characters" do
     # binding.pry
-    # user = Helpers.current_user(session)
+    user = Helpers.current_user(session)
     character = Character.create(
       :name => params["name"], 
-      :character_class => params["character_class"], 
-      :race => params["race"])
-      # :user_id => user.id)
+      :character_class => params["character_class"],
+      :race => params["race"],
+      :user_id => user.id)
     if character.save
       redirect to "/characters"
     else 

@@ -1,3 +1,4 @@
+<h2>Welcome <%= @user.username %></h2>
 <% @characters.each do |character| %>
   <h3><a href="/characters/<%= character.id %>"><%= character.name %></a></h3>
 <% end %>
