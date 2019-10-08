@@ -15,13 +15,14 @@
   </head>
   <body>
     <div class="wrapper">
-        <%  if Helpers.is_logged_in?(session) %>
-          <a href="/logout">Log Out</a><br><br>
-        <%  else %>
-          <a href="/signup">Sign Up</a><br><br>
-        <% end %>
+       
         <%= yield %>
-
+        <%  if Helpers.is_logged_in?(session) %>
+          <a href="/logout">Log Out</a><br>
+        <%  else %>
+          <a href="/login">Log In</a><br>
+          <a href="/signup">Sign Up</a><br>
+        <% end %>
       <footer class="branding">
         <small>&copy; 2019 <strong>SinatraOnlineGame</strong></small>
       </footer>
