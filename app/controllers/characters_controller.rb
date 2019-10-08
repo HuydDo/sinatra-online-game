@@ -71,12 +71,4 @@ class CharactersController < ApplicationController
   #Update
   #Delete
 
-
-  #index
-  #new
-  #create
-  #show
-  #edit
-  #update
-  #delete
-end
+ end
