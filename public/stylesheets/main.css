@@ -81,6 +81,11 @@
     margin-top: 20px;
     padding-top: 20px;
   }
+
+  .warning {
+    background-color: #ffffcc;
+    border-left: 6px solid #ffeb3b;
+  }
 }
 
 @media screen and (max-width: 600px) {

@@ -24,15 +24,18 @@ class CharactersController < ApplicationController
   post "/characters" do
     # binding.pry
     user = Helpers.current_user(session)
-    character = Character.create(
-      :name => params["name"], 
-      :character_class => params["character_class"],
-      :race => params["race"],
-      :user_id => user.id)
-    if character.save
+    # user = User.find_by_id(session[:user_id])
+    @c = user.characters.build(params)
+    # @c = Character.create(
+    #   :name => params["name"], 
+    #   :character_class => params["character_class"],
+    #   :race => params["race"],
+    #   :user_id => user.id)
+    if @c.save
       redirect to "/characters"
     else 
-      redirect to "/characters/new"
+      # redirect to "/characters/new"
+      erb :"characters/new"
     end
   end
 
@@ -54,6 +57,9 @@ class CharactersController < ApplicationController
       redirect to "/login"
     end
     # binding.pry
+    # user = Character.find_by_id(params[:id]).user
+    # if user.id == Helpers.current_user(session).id
+   
     @character = Character.find_by_id(params[:id])
     if Helpers.current_user(session).id != @character.user_id
       flash[:wrong_user_edit] = "You can only edit your own characters"
