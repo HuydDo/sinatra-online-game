@@ -15,6 +15,15 @@ class CharactersController < ApplicationController
     end  
   end
   
+  #show all characters
+  get "/characters/show_all" do
+    if !Helpers.is_logged_in?(session)
+      redirect to '/login'
+    else
+      @characters = Character.all
+      erb :"characters/index"
+    end
+  end
   #new
   get "/characters/new" do
     if !Helpers.is_logged_in?(session)
@@ -77,15 +86,15 @@ class CharactersController < ApplicationController
 
   #update
   patch "/characters/:id" do
-    @char = Character.find_by_id(params[:id])
+    @character = Character.find_by_id(params[:id])
    
-    if @char.update(:name => params["name"],
+    if @character.update(:name => params["name"],
     :character_class => params["character_class"],
     :race => params["race"]
     )
-      redirect to "/characters/#{@char.id}"
+      redirect to "/characters/#{@character.id}"
     else
-      redirect to "/characters/#{@char.id}/edit"
+      redirect to "/characters/#{@character.id}/edit"
     end
   end
   
@@ -96,8 +105,8 @@ class CharactersController < ApplicationController
     end
     @character = Character.find_by_id(params[:id])
     if Helpers.current_user(session).id != @character.user_id
-      flash[:wrong_user] = "You can only delete your own tweets"
-      redirect to '/tweets'
+      flash[:wrong_user] = "You can only delete your own characters"
+      redirect to '/characters'
     end
 
     Character.destroy(params[:id])
