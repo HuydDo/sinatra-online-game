@@ -1,15 +1,24 @@
+<% if @char && @char.errors %>
+    <% @char.errors.full_messages.each do |msg| %>
+        <div class="warning"> 
+          <p><strong><%= msg %></strong></p>
+        </div>
+    <% end %>
+<% end %>
+
+
 <h2>Edit Character</h2>
 <form action="/characters/<%= @character.id %>" method="post">
   <input type="hidden" id="hidden" name="_method" value="patch">
   <label>Name:</label>
   <input type="text" name="name" id="name"
-    value="<%= @character.name %>"><br><br>
+    value="<%= @character ? @character.name : ""%>"><br><br>
   <label>Class:</label>
   <input type="text" name="character_class" id="character_class"
-    value="<%= @character.character_class %>"><br><br>
+    value="<%= @character ? @character.character_class : "" %>"><br><br>
   <label>Race:</label>
   <input type="text" name="race" id="race"
-    value="<%= @character.race %>"><br><br>
+    value="<%= @character ? @character.race  : "" %>"><br><br>
   <input type="submit"><br><br>
   <a href="/logout"><button>Log Out</button></a><br>
 </form>

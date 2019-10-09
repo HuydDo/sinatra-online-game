@@ -61,6 +61,7 @@ class CharactersController < ApplicationController
     if !Helpers.is_logged_in?(session)
       redirect to "/login"
     end
+    
     # binding.pry
     # user = Character.find_by_id(params[:id]).user
     # if user.id == Helpers.current_user(session).id
@@ -76,15 +77,15 @@ class CharactersController < ApplicationController
 
   #update
   patch "/characters/:id" do
-    character = Character.find_by_id(params[:id])
+    @char = Character.find_by_id(params[:id])
    
-    if character.update(:name => params["name"],
+    if @char.update(:name => params["name"],
     :character_class => params["character_class"],
     :race => params["race"]
     )
-      redirect to "/characters/#{character.id}"
+      redirect to "/characters/#{@char.id}"
     else
-      redirect to "/characters/#{character.id}/edit"
+      redirect to "/characters/#{@char.id}/edit"
     end
    end
   
@@ -93,7 +94,7 @@ class CharactersController < ApplicationController
     if !Helpers.is_logged_in?(session)
       redirect to '/login'
     end
-    @character = .Character.find_by_id(params[:id])
+    @character = Character.find_by_id(params[:id])
     if Helpers.current_user(session).id != @character.user_id
       flash[:wrong_user] = "You can only delete your own tweets"
       redirect to '/tweets'

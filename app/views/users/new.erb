@@ -3,6 +3,14 @@
   <%= flash[:new_user_error] %>
 <% end %>
 
+<% if @user && @user.errors %>
+    <% @user.errors.full_messages.each do |msg| %>
+        <div class="warning"> 
+          <p><strong><%= msg %></strong></p>
+        </div>
+    <% end %>
+<% end %>
+
 <h2>Sign Up</h2>
 <form action="/signup" method="post">
   <label>User Name</label>
