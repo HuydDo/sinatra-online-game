@@ -4,7 +4,7 @@ class CharactersController < ApplicationController
   get "/characters" do
     # binding.pry
     if !Helpers.is_logged_in?(session)
-      redirect to '/login'
+      redirect to '/signup'
     else
     # if session[:user_id]
      @user = Helpers.current_user(session)
@@ -12,8 +12,7 @@ class CharactersController < ApplicationController
      erb :"characters/index"
     # else
     #   redirect to '/login'
-    end  
-  end
+    end    end
   
   #show all characters
   get "/characters/show_all" do
@@ -86,15 +85,21 @@ class CharactersController < ApplicationController
 
   #update
   patch "/characters/:id" do
-    @character = Character.find_by_id(params[:id])
-   
-    if @character.update(:name => params["name"],
-    :character_class => params["character_class"],
-    :race => params["race"]
-    )
-      redirect to "/characters/#{@character.id}"
+
+    user = Characters.find_by_id(params[:id]).user
+    if user.id == Helpers.current_user(params).id
+      @character = Character.find_by_id(params[:id])
+      if @character.update(:name => params["name"],
+      :character_class => params["character_class"],
+      :race => params["race"]
+      )
+        redirect to "/characters/#{@character.id}"
+      else
+        redirect to "/characters/#{@character.id}/edit"
+      end
     else
-      redirect to "/characters/#{@character.id}/edit"
+      flash[:wrong_user_edit] = "You can only edit your own characters"
+      erb :"/characters/index"
     end
   end
   
