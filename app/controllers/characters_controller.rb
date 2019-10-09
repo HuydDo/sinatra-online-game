@@ -50,8 +50,17 @@ class CharactersController < ApplicationController
 
   #edit
   get "/characters/:id/edit" do
+    if !Helpers.is_logged_in?(session)
+      redirect to "/login"
+    end
+    # binding.pry
     @character = Character.find_by_id(params[:id])
-    erb :"characters/edit"
+    if Helpers.current_user(session).id != @character.user_id
+      flash[:wrong_user_edit] = "You can only edit your own characters"
+      redirect to "/characters"
+    else
+      erb :"characters/edit"
+    end
   end
 
   #update

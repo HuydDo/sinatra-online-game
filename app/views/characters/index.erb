@@ -1,3 +1,7 @@
+<% if flash.has?(:wrong_user_edit) %>
+  <%= flash[:wrong_user_edit] %>
+<% end %>
+
 <h2>Welcome <%= @user.username %></h2>
 <% @characters.each do |character| %>
   <h3><a href="/characters/<%= character.id %>"><%= character.name %></a>
