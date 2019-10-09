@@ -87,10 +87,10 @@ class CharactersController < ApplicationController
     else
       redirect to "/characters/#{@char.id}/edit"
     end
-   end
+  end
   
-   #delete
-   delete "/characters/:id" do
+  #delete
+  delete "/characters/:id" do
     if !Helpers.is_logged_in?(session)
       redirect to '/login'
     end
@@ -102,11 +102,6 @@ class CharactersController < ApplicationController
 
     Character.destroy(params[:id])
     redirect to "/characters"
-   end
+  end
 
-  #Create
-  #Read
-  #Update
-  #Delete
-
- end
+end
