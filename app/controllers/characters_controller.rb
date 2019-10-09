@@ -86,8 +86,8 @@ class CharactersController < ApplicationController
   #update
   patch "/characters/:id" do
 
-    user = Characters.find_by_id(params[:id]).user
-    if user.id == Helpers.current_user(params).id
+    user = Character.find_by_id(params[:id]).user
+    if user.id == Helpers.current_user(session).id
       @character = Character.find_by_id(params[:id])
       if @character.update(:name => params["name"],
       :character_class => params["character_class"],
