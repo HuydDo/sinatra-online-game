@@ -1,28 +1,18 @@
 class UsersController < ApplicationController
  
   get '/signup' do
+    if Helpers.is_logged_in?(session)
+      redirect to '/characters'
+    end
     erb :"/users/new"
   end
 
   post '/signup' do
-    msg = [] 
     @user = User.create(:username => params["username"], :email => params["email"], :password => params["password"])
     if @user.save
       session[:user_id] = @user.id
       redirect to "/characters"
     else
-     
-      params.each do |key, value|
-        # binding.pry 
-        if value.empty?
-          msg << key.to_s
-          
-          # flash[:new_user_error] = "Please enter a value for #{key}"
-          # redirect to :"users/new"
-        end
-      end
-      msg.flatten
-      flash[:new_user_error] = "Please enter a value for #{msg}"
       erb :"/users/new"
     end
   end
@@ -40,6 +30,7 @@ class UsersController < ApplicationController
       session[:user_id] = user.id
       redirect to '/characters'
     else
+      flash[:login_error] = "Incorrect login. Please try again."
       redirect to '/login'
     end
   end

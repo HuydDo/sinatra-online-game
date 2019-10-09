@@ -17,20 +17,23 @@ class CharactersController < ApplicationController
   
   #new
   get "/characters/new" do
+    if !Helpers.is_logged_in?(session)
+      redirect to '/login'
+    end
     erb :"/characters/new"
   end
 
   #create
   post "/characters" do
     # binding.pry
-    user = Helpers.current_user(session)
-    # user = User.find_by_id(session[:user_id])
-    @c = user.characters.build(params)
-    # @c = Character.create(
-    #   :name => params["name"], 
-    #   :character_class => params["character_class"],
-    #   :race => params["race"],
-    #   :user_id => user.id)
+    # user = Helpers.current_user(session)
+    user = User.find_by_id(session[:user_id])
+    # @c = user.characters.build(params)
+    @c = Character.create(
+      :name => params["name"], 
+      :character_class => params["character_class"],
+      :race => params["race"],
+      :user_id => user.id)
     if @c.save
       redirect to "/characters"
     else 
@@ -42,8 +45,10 @@ class CharactersController < ApplicationController
   
   #show
   get "/characters/:id" do
+    if !Helpers.is_logged_in?(session)
+      redirect to '/login'
+    end
     @character = Character.find_by_id(params[:id])
-
     if @character
       erb :"characters/show"
     else
@@ -85,6 +90,15 @@ class CharactersController < ApplicationController
   
    #delete
    delete "/characters/:id" do
+    if !Helpers.is_logged_in?(session)
+      redirect to '/login'
+    end
+    @character = .Character.find_by_id(params[:id])
+    if Helpers.current_user(session).id != @character.user_id
+      flash[:wrong_user] = "You can only delete your own tweets"
+      redirect to '/tweets'
+    end
+
     Character.destroy(params[:id])
     redirect to "/characters"
    end
