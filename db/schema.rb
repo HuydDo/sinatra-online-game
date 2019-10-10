@@ -11,17 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191007180930) do
-
-  create_table "characterclasses", force: :cascade do |t|
-    t.string "name"
-  end
+ActiveRecord::Schema.define(version: 20191005200858) do
 
   create_table "characters", force: :cascade do |t|
+    t.string  "name"
     t.string  "character_class"
     t.string  "race"
     t.integer "user_id"
-    t.string  "name"
   end
 
   create_table "users", force: :cascade do |t|

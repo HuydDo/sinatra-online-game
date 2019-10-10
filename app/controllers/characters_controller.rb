@@ -17,7 +17,7 @@ class CharactersController < ApplicationController
   #show all characters
   get "/characters/show_all" do
     if !Helpers.is_logged_in?(session)
-      redirect to '/login'
+      redirect to '/signup'
     else
       @characters = Character.all
       erb :"characters/index"

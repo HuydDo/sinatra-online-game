@@ -12,9 +12,6 @@
   <input type="text" name="name" value="<%= @c ? @c.name : "" %>"><br><br>
   <label for="class-select">Class</label>
   <select name= "character_class" id="class-select">
-    <%# if @c %>
-     <option value="<%= @c.character_class %>"><%= @c.character_class %></option>
-    <%# else %>    
       <option value="">--Please choose class--</option>
       <option value="Warrior">Warrior</option>
       <option value="Paladin">Paladin</option>
@@ -28,16 +25,13 @@
       <option value="Monk">Monk</option>
       <option value="Druid">Druid</option>
       <option value="Demon Hunter">Demon Hunter</option>
-  <%# end %>
+  
   </select>
   <br><br>
- <!-- <input type="text" name="character_class"><br><br>
- -->
+ 
   <label for="race-select">Race</label>
   <select name="race" id="race-select">
-    <%# if @c %>
-     <option value="<%= @c.race %>"><%= @c.race %></option>
-    <%# else %> 
+   
       <option value="">--Please choose race--</option>
       <option value="Human">Human</option>
       <option value="Dwarf">Dwarf</option>
@@ -52,11 +46,12 @@
       <option value="Troll">Troll</option>
       <option value="Blood Elf">Blood Elf</option>
       <option value="Goblin">Goblin</option>
-     <%# end %> 
+      
   </select>
   <br><br>
-  <!-- <input type="text" name="race"><br><br> -->
   <input type="submit">
   <br><br>
+ 
   <a href="/logout">Log Out</a><br>
+ 
 </form>

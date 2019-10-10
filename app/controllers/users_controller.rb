@@ -19,16 +19,16 @@ class UsersController < ApplicationController
   end
 
   get '/login' do
-    if Helpers.is_logged_in?(session)
-      redirect to '/characters'
-    end
+    # if Helpers.is_logged_in?(session)
+    #   redirect to '/characters'
+    # end
     erb  :"/users/login"
   end
 
   post '/login' do
     # binding.pry
-user = User.find_by(:username => params["username"])  
-# user = User.find_by(username: params["username"])
+  user = User.find_by(:username => params[:username])  
+   # user = User.find_by(username: params["username"])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
       redirect to '/characters'
@@ -39,12 +39,12 @@ user = User.find_by(:username => params["username"])
   end
 
   get '/logout' do
-    if Helpers.is_logged_in?(session)
+    # if Helpers.is_logged_in?(session)
       session.destroy
       redirect to "/login"
-    else
-      redirect to "/"
-    end
+  #   else
+  #     redirect to "/"
+  #   end
   end
 
 end
