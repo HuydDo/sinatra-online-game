@@ -22,7 +22,7 @@ class CharactersController < ApplicationController
     end
   end
 
-  #new 
+  #new
   get "/characters/new" do
     if !Helpers.is_logged_in?(session)
       redirect to '/login'
@@ -68,14 +68,14 @@ class CharactersController < ApplicationController
       redirect to "/login"
     end
   
-    # user = Character.find_by_id(params[:id]).user
-    # if user.id == Helpers.current_user(session).id
-   
-    @character = Character.find_by_id(params[:id])
-    if Helpers.current_user(session).id != @character.user_id
-      flash[:wrong_user_edit] = "You can only edit your own characters"
+    user = Character.find_by_id(params[:id]).user
+    if user.id != Helpers.current_user(session).id
+    # if Helpers.current_user(session).id != @character.user_id
+    puts params[:id]  
+    flash[:wrong_user_edit] = "You can only edit your own characters"
       redirect to "/characters"
     else
+      @character = Character.find_by_id(params[:id])
       erb :"characters/edit"
     end
   end
@@ -109,10 +109,10 @@ class CharactersController < ApplicationController
     if Helpers.current_user(session).id != @character.user_id
       flash[:wrong_user] = "You can only delete your own characters"
       redirect to '/characters'
+    else
+      Character.destroy(params[:id])
+      redirect to "/characters"
     end
-
-    Character.destroy(params[:id])
-    redirect to "/characters"
   end
 
 end
