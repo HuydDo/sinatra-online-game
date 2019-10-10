@@ -8,7 +8,8 @@ class CharactersController < ApplicationController
     else
     # if session[:user_id]
      @user = Helpers.current_user(session)
-     @characters = @user.characters
+    #  @characters = @user.characters
+    @characters = Helpers.current_user(session).characters
      erb :"characters/index"
     # else
     #   redirect to '/login'
