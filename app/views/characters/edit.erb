@@ -2,13 +2,9 @@
 <form action="/characters/<%= @character.id %>" method="post">
   <input type="hidden" id="hidden" name="_method" value="patch">
   <label>Name:</label>
-  <input type="text" name="name" id="name"
-    value="<%= @character.name %>"><br><br>
+  <input type="text" name="name" id="name" value="<%= @character.name %>"><br><br>
   
   <label for="class-select">Class:</label>
- <!-- <input type="text" name="character_class" id="character_class"
-    value="<%= @character ? @character.character_class : "" %>"><br><br>
- --> 
   <select name= "character_class" id="class-select">
       <option value="<%= @character.character_class %>"><%= @character.character_class %></option>
       <option value="">--Please choose class--</option>
@@ -28,10 +24,7 @@
   <br><br>
   
   <label for="race-select">Race:</label>
- <!-- <input type="text" name="race" id="race"
-    value="<%= @character ? @character.race  : "" %>"><br><br>
- -->
-   <select name="race" id="race-select">
+    <select name="race" id="race-select">
     <option value="<%= @character.race %>"><%= @character.race %></option>
     <option value="">--Please choose race--</option>
     <option value="Human">Human</option>
@@ -51,6 +44,6 @@
   <br><br>
   
   <input type="submit"><br><br>
-  <a href="/logout">Log Out</a><br>
+  <a href="/logout"><button>Log Out</button></a><br>
 
 </form>

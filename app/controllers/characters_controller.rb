@@ -2,18 +2,15 @@ class CharactersController < ApplicationController
 
  #index
   get "/characters" do
-    # binding.pry
     if !Helpers.is_logged_in?(session)
       redirect to '/signup'
     else
-    # if session[:user_id]
      @user = Helpers.current_user(session)
-    #  @characters = @user.characters
-    @characters = Helpers.current_user(session).characters
+     @characters = @user.characters
+     # @characters = Helpers.current_user(session).characters
      erb :"characters/index"
-    # else
-    #   redirect to '/login'
-    end    end
+    end    
+  end
   
   #show all characters
   get "/characters/show_all" do
@@ -24,6 +21,7 @@ class CharactersController < ApplicationController
       erb :"characters/index"
     end
   end
+
   #new
   get "/characters/new" do
     if !Helpers.is_logged_in?(session)
@@ -34,7 +32,6 @@ class CharactersController < ApplicationController
 
   #create
   post "/characters" do
-    # binding.pry
     # user = Helpers.current_user(session)
     user = User.find_by_id(session[:user_id])
     # @c = user.characters.build(params)
@@ -70,8 +67,7 @@ class CharactersController < ApplicationController
     if !Helpers.is_logged_in?(session)
       redirect to "/login"
     end
-    
-    # binding.pry
+  
     # user = Character.find_by_id(params[:id]).user
     # if user.id == Helpers.current_user(session).id
    
