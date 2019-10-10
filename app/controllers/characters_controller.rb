@@ -22,7 +22,7 @@ class CharactersController < ApplicationController
     end
   end
 
-  #new
+  #new 
   get "/characters/new" do
     if !Helpers.is_logged_in?(session)
       redirect to '/login'
