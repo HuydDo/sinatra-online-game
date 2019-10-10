@@ -9,4 +9,5 @@ end
 use Rack::MethodOverride
 use UsersController
 use CharactersController
+use Rack::Flash
 run ApplicationController
