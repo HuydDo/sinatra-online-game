@@ -47,7 +47,6 @@ class CharactersController < ApplicationController
       erb :"characters/new"
     end
   end
-
   
   #show
   get "/characters/:id" do
@@ -64,7 +63,6 @@ class CharactersController < ApplicationController
 
   #edit
   get "/characters/:id/edit" do
-    # binding.pry
     if !Helpers.is_logged_in?(session)
       redirect to "/login"
     end
@@ -72,7 +70,7 @@ class CharactersController < ApplicationController
     user = Character.find_by_id(params[:id]).user
     if user.id != Helpers.current_user(session).id
     # if Helpers.current_user(session).id != @character.user_id
-      flash[:danger] = "You can only edit your own characters"
+      flash[:warning] = "You can only edit your own character!"
       redirect to "/characters"
     else
       @character = Character.find_by_id(params[:id])
@@ -82,7 +80,6 @@ class CharactersController < ApplicationController
 
   #update
   patch "/characters/:id" do
-    
     user = Character.find_by_id(params[:id]).user
     if user.id == Helpers.current_user(session).id
       @character = Character.find_by_id(params[:id])
@@ -96,7 +93,6 @@ class CharactersController < ApplicationController
         redirect to "/characters/#{@character.id}/edit"
       end
     else
-      flash[:warning] = "You can only edit your own characters"
       erb :"/characters/index"
     end
   end
