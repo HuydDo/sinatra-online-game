@@ -1,7 +1,9 @@
 <% if @c && @c.errors %>
     <% @c.errors.full_messages.each do |msg| %>
-        <div class="warning"> 
-          <p><strong><%= msg %></strong></p>
+       <div data-alert class="warning" alert-box radius">
+        <!-- <div class="warning"> -->
+          <%= msg %>
+          <a href="#" onclick="this.parentElement.style.display='none';">&times;</a>
         </div>
     <% end %>
 <% end %>
