@@ -108,7 +108,7 @@ class CharactersController < ApplicationController
     end
     @character = Character.find_by_id(params[:id])
     if Helpers.current_user(session).id != @character.user_id
-      flash[:danger] = "You can only delete your own characters"
+      flash[:warning] = "You can only delete your own characters"
       redirect to '/characters'
     else
       Character.destroy(params[:id])

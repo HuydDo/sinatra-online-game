@@ -33,6 +33,7 @@ class UsersController < ApplicationController
     flash[:info] = "Successfully signed in as #{params[:username]}"
     redirect to '/characters'
   else
+    flash[:warning] = "Something wrong with your username or password"
     redirect to '/login'
   end
   end
