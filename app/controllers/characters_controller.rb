@@ -24,9 +24,9 @@ class CharactersController < ApplicationController
 
   #new
   get "/characters/new" do
-    if !Helpers.is_logged_in?(session)
-      redirect to '/login'
-    end
+    # if !Helpers.is_logged_in?(session)
+    #   redirect to '/login'
+    # end
     erb :"/characters/new"
   end
 
@@ -51,9 +51,9 @@ class CharactersController < ApplicationController
   
   #show
   get "/characters/:id" do
-    if !Helpers.is_logged_in?(session)
-      redirect to '/login'
-    end
+    # if !Helpers.is_logged_in?(session)
+    #   redirect to '/login'
+    # end
     @character = Character.find_by_id(params[:id])
     if @character
       erb :"characters/show"
@@ -64,9 +64,9 @@ class CharactersController < ApplicationController
 
   #edit
   get "/characters/:id/edit" do
-    if !Helpers.is_logged_in?(session)
-      redirect to "/login"
-    end
+    # if !Helpers.is_logged_in?(session)
+    #   redirect to "/login"
+    # end
   
     user = Character.find_by_id(params[:id]).user
     if user.id != Helpers.current_user(session).id
@@ -102,9 +102,9 @@ class CharactersController < ApplicationController
   
   #delete
   delete "/characters/:id" do
-    if !Helpers.is_logged_in?(session)
-      redirect to '/login'
-    end
+    # if !Helpers.is_logged_in?(session)
+    #   redirect to '/login'
+    # end
     @character = Character.find_by_id(params[:id])
     if Helpers.current_user(session).id != @character.user_id
       flash[:danger] = "You can only delete your own characters"
