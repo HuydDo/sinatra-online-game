@@ -41,6 +41,7 @@ class CharactersController < ApplicationController
       :race => params["race"],
       :user_id => user.id)
     if @c.save
+      flash[:success] = "Character was created"
       redirect to "/characters"
     else 
       # redirect to "/characters/new"
@@ -70,10 +71,11 @@ class CharactersController < ApplicationController
     user = Character.find_by_id(params[:id]).user
     if user.id != Helpers.current_user(session).id
     # if Helpers.current_user(session).id != @character.user_id
-      flash[:danger] = "You can only edit your own character!"
+      flash[:danger] = "You can only edit your own character"
       redirect to "/characters"
     else
       @character = Character.find_by_id(params[:id])
+      flash[:success] = "Character was updated"
       erb :"characters/edit"
     end
   end
