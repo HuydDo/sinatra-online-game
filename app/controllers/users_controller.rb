@@ -12,8 +12,11 @@ class UsersController < ApplicationController
     @user = User.new(params)
     if @user.save
       session[:user_id] = @user.id
+      flash[:success] = "Account was created"
       redirect to "/characters"
+      
     else
+      flash[:danger] = "Make sure all fields are entered correctly"
       erb :"/users/new"
     end
   end
@@ -33,13 +36,14 @@ class UsersController < ApplicationController
     flash[:success] = "Successfully signed in as #{params[:username]}"
     redirect to '/characters'
   else
-    flash[:warning] = "Invalid username/password"
+    flash[:danger] = "Invalid username/password"
     redirect to '/login'
   end
   end
 
   get '/logout' do
     session.destroy
+    flash[:success] = "Successfully signed out"
     redirect to "/login"
   end
 
