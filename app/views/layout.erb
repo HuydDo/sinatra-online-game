@@ -16,7 +16,14 @@
   </head>
   <body>
     <div class="wrapper">
-       
+   
+     <% flash.keys.each do |type| %>
+       <div data-alert class="flash <%= type %> alert-box radius">
+        <%= flash[type] %>
+         <a href="#" class="close">&times;</a>
+       </div>
+     <% end %>  
+
      <%= yield %>
  <!--   <% if Helpers.is_logged_in?(session) %>
         <a href="/logout"><button>Log Out</button></a><br>

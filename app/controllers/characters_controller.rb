@@ -72,7 +72,7 @@ class CharactersController < ApplicationController
     user = Character.find_by_id(params[:id]).user
     if user.id != Helpers.current_user(session).id
     # if Helpers.current_user(session).id != @character.user_id
-      flash[:wrong_user] = "You can only edit your own characters"
+      flash[:warning] = "You can only edit your own characters"
       redirect to "/characters"
     else
       @character = Character.find_by_id(params[:id])
@@ -96,7 +96,7 @@ class CharactersController < ApplicationController
         redirect to "/characters/#{@character.id}/edit"
       end
     else
-      flash[:wrong_user] = "You can only edit your own characters"
+      flash[:warning] = "You can only edit your own characters"
       erb :"/characters/index"
     end
   end
@@ -108,7 +108,7 @@ class CharactersController < ApplicationController
     end
     @character = Character.find_by_id(params[:id])
     if Helpers.current_user(session).id != @character.user_id
-      flash[:wrong_user] = "You can only delete your own characters"
+      flash[:warning] = "You can only delete your own characters"
       redirect to '/characters'
     else
       Character.destroy(params[:id])

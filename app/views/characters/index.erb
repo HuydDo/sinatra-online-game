@@ -1,11 +1,3 @@
-<% if flash.has?(:wrong_user) %>
- <div class="warning"> 
-     <p><strong><%= flash[:wrong_user] %></strong></p>
- </div>
-<% end %>
-
-
-
 <% if @user %>
   <h2>Welcome, <%= @user.username %>!</h2>
 <% else %>
