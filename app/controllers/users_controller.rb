@@ -14,7 +14,6 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       flash[:success] = "Account was created"
       redirect to "/characters"
-      
     else
       flash[:danger] = "Make sure all fields are entered correctly"
       erb :"/users/new"
