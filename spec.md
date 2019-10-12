@@ -2,25 +2,27 @@
 
 Specs:
 - [x] Use Sinatra to build the app
-      Use Corneal gem to create the app
+      Use Corneal gem to create the Sinatra app
 - [x] Use ActiveRecord for storing information in a database
-      Use rake db:create_migration, rake db:migrate, rake db:seed to create tables and migrate the to database
+      Use rake db:create_migration, rake db:migrate, rake db:seed to create tables and store the data to the database
 - [x] Include more than one model class (e.g. User, Post, Category)
-      Create User, Character models in Model folder
+      Create User, Character model classes and store them in Model folder
 - [x] Include at least one has_many relationship on your User model (e.g. User has_many Posts)
-      Add User has_many Characters in user.rb
+      User has_many Characters 
 - [x] Include at least one belongs_to relationship on another model (e.g. Post belongs_to User)
-      Add Character belongs_to User in character.rb
+      Character belongs_to User 
 - [x] Include user accounts with unique login attribute (username or email)
-      Use Session and authenticate to check unique login 
+      Use password_digest, has_secure_password, authenticate, and Helpers functions to check unique user login 
 - [x] Ensure that the belongs_to resource has routes for Creating, Reading, Updating and Destroying
-      Include Create, Read, Update, and Destroy routes in Characters_controller
+      Characters_controller has Create, Read, Update, and Destroy routes 
 - [x] Ensure that users can't modify content created by other users
-      Use Helpers functions to check if the user edit or modify characters which are not belong to the them
+      Characters_controller use Edit, Patch, and Delete routes to check the user can't modify other user's characters
 - [x] Include user input validations
-       Use validates :username, :email, presence: true to validate username, email when create new user
+      Model character uses validates :username, :email, presence: true to validate when create a new user
+      Model user uses validates :name, :character_class, :race, presence: true to validate when create a new character 
+      Use HTML to validate user's email input
 - [x] BONUS - not required - Display validation failures to user with error message (example form URL e.g. /posts/new)
-      Use HTML, Flash gem, ActiveRecord errors to validate show error message for user's incorrect input
+      User Sinatra Flash, ActiveRecord errors to display error message for user's incorrect input
 - [x] Your README.md includes a short description, install instructions, a contributors guide and a link to the license for your code
 
 Confirm
