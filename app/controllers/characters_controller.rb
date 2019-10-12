@@ -24,9 +24,6 @@ class CharactersController < ApplicationController
 
   #new
   get "/characters/new" do
-    # if !Helpers.is_logged_in?(session)
-    #   redirect to '/login'
-    # end
     erb :"/characters/new"
   end
 
@@ -51,9 +48,6 @@ class CharactersController < ApplicationController
   
   #show
   get "/characters/:id" do
-    # if !Helpers.is_logged_in?(session)
-    #   redirect to '/login'
-    # end
     @character = Character.find_by_id(params[:id])
     if @character
       erb :"characters/show"
@@ -64,10 +58,6 @@ class CharactersController < ApplicationController
 
   #edit
   get "/characters/:id/edit" do
-    # if !Helpers.is_logged_in?(session)
-    #   redirect to "/login"
-    # end
-  
     user = Character.find_by_id(params[:id]).user
     if user.id != Helpers.current_user(session).id
     # if Helpers.current_user(session).id != @character.user_id
@@ -75,7 +65,7 @@ class CharactersController < ApplicationController
       redirect to "/characters"
     else
       @character = Character.find_by_id(params[:id])
-      flash[:success] = "Character was updated"
+      # flash[:success] = "Character was updated"
       erb :"characters/edit"
     end
   end
@@ -86,10 +76,8 @@ class CharactersController < ApplicationController
     if user.id == Helpers.current_user(session).id
       @character = Character.find_by_id(params[:id])
 
-      if @character.update(:name => params["name"],
-      :character_class => params["character_class"],
-      :race => params["race"]
-      )
+      if @character.update(:name => params["name"],:character_class => params["character_class"],:race => params["race"])  
+        flash[:success] = "Character was updated"
         redirect to "/characters/#{@character.id}"
       else
         flash[:warning] = "Make sure all fields are entered correctly"
@@ -102,9 +90,6 @@ class CharactersController < ApplicationController
   
   #delete
   delete "/characters/:id" do
-    # if !Helpers.is_logged_in?(session)
-    #   redirect to '/login'
-    # end
     @character = Character.find_by_id(params[:id])
     if Helpers.current_user(session).id != @character.user_id
       flash[:danger] = "You can only delete your own characters"
