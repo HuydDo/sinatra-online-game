@@ -111,6 +111,7 @@ class CharactersController < ApplicationController
       redirect to '/characters'
     else
       Character.destroy(params[:id])
+      flash[:success] = "Character was deleted"
       redirect to "/characters"
     end
   end

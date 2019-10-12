@@ -20,6 +20,7 @@
     background-attachment: fixed;  
     background-size: cover;
 
+
     color: #333;
     font-family: Sans-Serif;
     line-height: 18px;
@@ -138,5 +139,15 @@
   h2 {
     font-size: 18px;
     line-height: 24px;
+  }
+
+  body {
+    background-image: url('../images/wow.jpg');
+    width: 100%;
+    height: auto;
+    
+    color: #333;
+    font-family: Sans-Serif;
+    line-height: 18px;
   }
 }

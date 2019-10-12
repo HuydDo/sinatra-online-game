@@ -18,7 +18,7 @@
     <div class="wrapper">
    
      <% flash.keys.each do |type| %>
-       <div data-alert class="flash <%= type %> alert-box radius">
+       <div data-alert class=" <%= type %> ">
         <%= flash[type] %>
         <a href="#" onclick="this.parentElement.style.display='none';">&times;</a>
        </div>
