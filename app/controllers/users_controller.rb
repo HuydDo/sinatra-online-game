@@ -8,7 +8,6 @@ class UsersController < ApplicationController
   end
 
   post '/signup' do
-    # @user = User.create(:username => params["username"], :email => params["email"], :password => params["password"])
     @user = User.new(params)
     if @user.save
       session[:user_id] = @user.id
@@ -26,7 +25,6 @@ class UsersController < ApplicationController
 
   post '/login' do
     user = User.find_by(:username => params[:username]) 
-    # user = User.find_by(username: params[:username])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
       flash[:success] = "Successfully signed in as #{params[:username]}"

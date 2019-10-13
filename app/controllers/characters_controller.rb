@@ -7,7 +7,6 @@ class CharactersController < ApplicationController
     else
      @user = Helpers.current_user(session)
      @characters = @user.characters
-     # @characters = Helpers.current_user(session).characters
      erb :"characters/index"
     end    
   end
@@ -29,9 +28,7 @@ class CharactersController < ApplicationController
 
   #create
   post "/characters" do
-    # user = Helpers.current_user(session)
     user = User.find_by_id(session[:user_id])
-    # @c = user.characters.build(params)
     @c = Character.create(
       :name => params["name"], 
       :character_class => params["character_class"],
@@ -41,7 +38,6 @@ class CharactersController < ApplicationController
       flash[:success] = "Character was created"
       redirect to "/characters"
     else 
-      # redirect to "/characters/new"
       erb :"characters/new"
     end
   end
@@ -60,12 +56,10 @@ class CharactersController < ApplicationController
   get "/characters/:id/edit" do
     user = Character.find_by_id(params[:id]).user
     if user.id != Helpers.current_user(session).id
-    # if Helpers.current_user(session).id != @character.user_id
       flash[:danger] = "You can only edit your own character"
       redirect to "/characters"
     else
       @character = Character.find_by_id(params[:id])
-      # flash[:success] = "Character was updated"
       erb :"characters/edit"
     end
   end
